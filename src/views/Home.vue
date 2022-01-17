@@ -1,16 +1,13 @@
 <template>
-  <hello-world />
+  <h1>Pimba</h1>
 </template>
 
 <script lang="ts">
-  import Vue from 'vue'
-  import HelloWorld from '../components/HelloWorld.vue'
+import Vue from 'vue';
+import Component from 'vue-class-component';
 
-  export default Vue.extend({
-    name: 'Home',
+@Component
+export default class Home extends Vue {
 
-    components: {
-      HelloWorld,
-    },
-  })
+}
 </script>
