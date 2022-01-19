@@ -1,7 +1,5 @@
 <template>
-  <div>
-    Bem Vindo ao site de venda de Miniaturas
-  </div>
+    <h1>View do Carrinho</h1>
 </template>
 
 <script lang="ts">
@@ -9,7 +7,7 @@ import Vue from 'vue';
 import Component from 'vue-class-component';
 
 @Component
-export default class Home extends Vue {
+export default class Cart extends Vue {
 
 }
 </script>
