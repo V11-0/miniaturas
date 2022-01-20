@@ -6,6 +6,7 @@ import Products from '@/views/Products.vue';
 import Cart from '@/views/Cart.vue';
 import Login from '@/views/Login.vue';
 import Register from '@/views/Register.vue';
+import UserInfo from '@/views/UserInfo.vue';
 
 Vue.use(VueRouter)
 
@@ -42,6 +43,11 @@ const routes: Array<RouteConfig> = [
     path: '/register',
     name: 'Register',
     component: Register
+  },
+  {
+    path: '/userinfo',
+    name: 'UserInfo',
+    component: UserInfo
   }
 ];
 
