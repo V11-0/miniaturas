@@ -18,4 +18,8 @@ export default class UserRepository {
         const resp = await axios.post("/users/save", user);
         return resp.data;
     }
+
+    public static async saveHistory(userId: number, miniatureId: number): Promise<void> {
+        await axios.post("/users/history/add-miniature", { userId, miniatureId });
+    }
 }

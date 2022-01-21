@@ -77,6 +77,7 @@ import { Miniature } from "@/models/Miniature";
 import MiniaturesRepository from "@/repositories/MiniaturesRepository";
 
 import UserModule from "@/store/modules/UserModule";
+import UserRepository from "@/repositories/UserRepository";
 
 @Component
 export default class MiniatureView extends Vue {
@@ -91,10 +92,18 @@ export default class MiniatureView extends Vue {
 
     async created(): Promise<void> {
         this.miniature = await this.fetchMiniature();
+
+        if (this.userModule.user !== null) {
+            await this.saveHistory();
+        }
     }
 
     async fetchMiniature(): Promise<Miniature> {
         return await MiniaturesRepository.getMiniature(this.miniatureId);
+    }
+
+    async saveHistory(): Promise<void> {
+        await UserRepository.saveHistory(this.userModule.user?.id!, this.miniatureId);
     }
 
     addToCart(): void {

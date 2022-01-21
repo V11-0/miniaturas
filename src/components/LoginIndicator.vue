@@ -13,14 +13,14 @@
                 </v-btn>
             </template>
             <v-list>
-                <v-list-item link :to="{ name: 'UserInfo' }">
+                <!-- <v-list-item link :to="{ name: 'UserInfo' }">
                     <v-list-item-icon
                         ><v-icon
                             >mdi-account-details-outline</v-icon
                         ></v-list-item-icon
                     >
                     <v-list-item-title>User Info</v-list-item-title>
-                </v-list-item>
+                </v-list-item> -->
                 <v-list-item link @click="logout">
                     <v-list-item-icon
                         ><v-icon>mdi-logout</v-icon></v-list-item-icon

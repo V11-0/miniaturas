@@ -5,13 +5,75 @@
         </v-alert>
 
         <div v-if="haveProducts">
-            <v-card v-for="minCart in cart" :key="minCart.product.id" class="d-flex justify-space-around">
-                <v-img :lazy-src="minCart.product.image" height="50px" width="50px" />
-
-                <span>{{ minCart.product.model }}</span>
-
-                <span>{{ minCart.quantity }}</span>
+            <v-card class="rounded">
+                <div
+                    v-for="minCart in cart"
+                    :key="minCart.product.id"
+                    class="py-4 px-16"
+                >
+                    <v-row class="align-center">
+                        <v-col>
+                            <v-img
+                                :src="minCart.product.image"
+                                max-height="150"
+                                max-width="250"
+                            />
+                        </v-col>
+                        <v-col>
+                            <span>{{ minCart.product.model }}</span>
+                        </v-col>
+                        <v-col>
+                            <div
+                                class="
+                                    d-flex
+                                    justify-space-between
+                                    align-center
+                                "
+                            >
+                                <v-btn
+                                    text
+                                    icon
+                                    large
+                                    @click="minCart.quantity--"
+                                >
+                                    <v-icon>mdi-minus</v-icon>
+                                </v-btn>
+                                <span class="text-h6 mx-1">{{
+                                    minCart.quantity
+                                }}</span>
+                                <v-btn
+                                    text
+                                    icon
+                                    large
+                                    @click="minCart.quantity++"
+                                >
+                                    <v-icon>mdi-plus</v-icon>
+                                </v-btn>
+                            </div>
+                        </v-col>
+                        <v-col>
+                            <span class="text-h5"
+                                >R$
+                                {{
+                                    minCart.product.price * minCart.quantity
+                                }}</span
+                            >
+                        </v-col>
+                    </v-row>
+                </div>
             </v-card>
+
+            <div class="mt-8 d-flex justify-end align-center">
+                <div class="mr-8">
+                    <span class="text-h6">Total: </span>
+                    <span class="text-h5">R$ {{ totalValue }}</span>
+                </div>
+
+                <v-btn color="accent" :loading="finishingOrder">
+                    <v-icon class="mr-4" @click="finishOrder">mdi-cart-outline</v-icon>
+                    Finalizar Compra
+                </v-btn>
+            </div>
         </div>
 
         <div v-else>
@@ -21,17 +83,24 @@
 </template>
 
 <script lang="ts">
-import Vue from 'vue';
-import Component from 'vue-class-component';
-import { getModule } from 'vuex-module-decorators';
+import Vue from "vue";
+import Component from "vue-class-component";
+import { getModule } from "vuex-module-decorators";
 
-import UserModule from '@/store/modules/UserModule';
-import { MiniatureCart } from '@/models/MiniatureCart';
+import UserModule from "@/store/modules/UserModule";
+import { MiniatureCart } from "@/models/MiniatureCart";
 
 @Component
 export default class Cart extends Vue {
-
     store = getModule(UserModule, this.$store);
+
+    finishingOrder = false;
+
+    finishOrder(): void {
+        this.finishingOrder = true;
+
+        setTimeout(() => this.$router.push({ name: 'OrderFinished' }), 1500);
+    }
 
     get logged(): boolean {
         return this.store.user !== null;
@@ -43,6 +112,16 @@ export default class Cart extends Vue {
 
     get cart(): Array<MiniatureCart> {
         return this.store.cart;
+    }
+
+    get totalValue(): number {
+        let value = 0;
+
+        this.cart.forEach(mCart => {
+            value += mCart.product.price * mCart.quantity
+        });
+
+        return value;
     }
 }
 </script>

@@ -8,6 +8,7 @@ import Login from '@/views/Login.vue';
 import Register from '@/views/Register.vue';
 import UserInfo from '@/views/UserInfo.vue';
 import MiniatureView from '@/views/MiniatureView.vue'
+import OrderFinished from '@/views/OrderFinished.vue'
 
 Vue.use(VueRouter)
 
@@ -55,6 +56,11 @@ const routes: Array<RouteConfig> = [
     name: 'Miniature',
     component: MiniatureView,
     props: true
+  },
+  {
+    path: '/orderfinished',
+    name: 'OrderFinished',
+    component: OrderFinished
   }
 ];
 

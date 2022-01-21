@@ -1,5 +1,5 @@
 <template>
-    <v-bottom-navigation app grow color="primary">
+    <v-bottom-navigation app grow color="primary" background-color="blue-grey darken-4">
         <v-btn :to="{ name: 'Products' }">
             <span>Produtos</span>
             <v-icon>mdi-store-search</v-icon>
