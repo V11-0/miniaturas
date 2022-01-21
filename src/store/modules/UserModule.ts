@@ -17,4 +17,9 @@ export default class UserModule extends VuexModule {
     addToCart(product: MiniatureCart) {
         this.cart.push(product);
     }
+
+    @Mutation
+    setCart(cart: Array<MiniatureCart>) {
+        this.cart = cart;
+    }
 }

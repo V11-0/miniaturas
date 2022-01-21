@@ -100,6 +100,7 @@ import { Miniature } from "@/models/Miniature";
 import UserModule from "@/store/modules/UserModule";
 
 import MiniaturesRepository from "@/repositories/MiniaturesRepository";
+import UserRepository from "@/repositories/UserRepository";
 
 @Component
 export default class Products extends Vue {
@@ -135,8 +136,15 @@ export default class Products extends Vue {
         }
     }
 
-    addToCart(): void {
-        this.userModule.addToCart({ product: this.selectedProduct!, quantity: this.addCartCount });
+    async addToCart(): Promise<void> {
+
+        if (this.userModule.user !== null) {
+            let userId = this.userModule.user.id;
+
+            await UserRepository.addToCart(userId!, { miniatureId: this.selectedProduct?.id!, quantity: this.addCartCount });
+        }
+
+        this.userModule.addToCart({ miniature: this.selectedProduct!, quantity: this.addCartCount });
         this.bottomSheetModel = false;
         this.showAddedCartAlert = true;
     }

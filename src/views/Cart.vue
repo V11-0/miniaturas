@@ -8,19 +8,19 @@
             <v-card class="rounded">
                 <div
                     v-for="minCart in cart"
-                    :key="minCart.product.id"
+                    :key="minCart.miniature.id"
                     class="py-4 px-16"
                 >
                     <v-row class="align-center">
                         <v-col>
                             <v-img
-                                :src="minCart.product.image"
+                                :src="minCart.miniature.image"
                                 max-height="150"
                                 max-width="250"
                             />
                         </v-col>
                         <v-col>
-                            <span>{{ minCart.product.model }}</span>
+                            <span>{{ minCart.miniature.model }}</span>
                         </v-col>
                         <v-col>
                             <div
@@ -55,7 +55,7 @@
                             <span class="text-h5"
                                 >R$
                                 {{
-                                    minCart.product.price * minCart.quantity
+                                    minCart.miniature.price * minCart.quantity
                                 }}</span
                             >
                         </v-col>
@@ -69,8 +69,8 @@
                     <span class="text-h5">R$ {{ totalValue }}</span>
                 </div>
 
-                <v-btn color="accent" :loading="finishingOrder">
-                    <v-icon class="mr-4" @click="finishOrder">mdi-cart-outline</v-icon>
+                <v-btn color="accent" :loading="finishingOrder" @click="finishOrder">
+                    <v-icon class="mr-4">mdi-cart-outline</v-icon>
                     Finalizar Compra
                 </v-btn>
             </div>
@@ -99,7 +99,10 @@ export default class Cart extends Vue {
     finishOrder(): void {
         this.finishingOrder = true;
 
-        setTimeout(() => this.$router.push({ name: 'OrderFinished' }), 1500);
+        setTimeout(() => {
+            this.store.setCart([]);
+            this.$router.push({ name: 'OrderFinished' });
+        }, 1500);
     }
 
     get logged(): boolean {
@@ -118,7 +121,7 @@ export default class Cart extends Vue {
         let value = 0;
 
         this.cart.forEach(mCart => {
-            value += mCart.product.price * mCart.quantity
+            value += mCart.miniature.price * mCart.quantity
         });
 
         return value;

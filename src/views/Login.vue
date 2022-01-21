@@ -82,6 +82,14 @@ export default class Login extends Vue {
                 const user = await UserRepository.login(this.cpf, sha512(this.password));
                 this.userStore.setUser(user);
 
+                this.userStore.setCart([]);
+
+                const cartData: any = await UserRepository.getCart(user.id!);
+
+                if (cartData) {
+                    this.userStore.setCart(cartData.cartItems);
+                }
+
                 this.$router.push({ name: 'Products'});
             } catch (e) {
                 this.loading = false;

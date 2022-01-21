@@ -25,5 +25,6 @@ import BaseNavigation from '@/components/base/BaseNavigation.vue';
         BaseNavigation
     },
 })
-export default class App extends Vue {}
+export default class App extends Vue {
+}
 </script>

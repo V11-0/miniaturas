@@ -106,8 +106,16 @@ export default class MiniatureView extends Vue {
         await UserRepository.saveHistory(this.userModule.user?.id!, this.miniatureId);
     }
 
-    addToCart(): void {
-        this.userModule.addToCart({ product: this.miniature!, quantity: this.addCartCount });
+    async addToCart(): Promise<void> {
+
+        this.userModule.addToCart({ miniature: this.miniature!, quantity: this.addCartCount });
+
+        if (this.userModule.user !== null) {
+            let userId = this.userModule.user.id;
+
+            await UserRepository.addToCart(userId!, { miniatureId: this.miniatureId, quantity: this.addCartCount });
+        }
+
         this.$router.push({ name: 'Cart' })
     }
 

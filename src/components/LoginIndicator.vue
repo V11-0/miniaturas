@@ -49,6 +49,7 @@ export default class LoginIndicator extends Vue {
 
     logout(): void {
         this.store.setUser(null);
+        this.store.setCart([]);
     }
 
     get userInitials(): string | undefined {
