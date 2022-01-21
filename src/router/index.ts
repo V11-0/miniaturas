@@ -7,6 +7,7 @@ import Cart from '@/views/Cart.vue';
 import Login from '@/views/Login.vue';
 import Register from '@/views/Register.vue';
 import UserInfo from '@/views/UserInfo.vue';
+import MiniatureView from '@/views/MiniatureView.vue'
 
 Vue.use(VueRouter)
 
@@ -48,6 +49,12 @@ const routes: Array<RouteConfig> = [
     path: '/userinfo',
     name: 'UserInfo',
     component: UserInfo
+  },
+  {
+    path: '/miniature/:miniatureId',
+    name: 'Miniature',
+    component: MiniatureView,
+    props: true
   }
 ];
 

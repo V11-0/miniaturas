@@ -7,4 +7,9 @@ export default class MiniaturesRepository {
         const resp = await axios.get("/miniatures");
         return resp.data;
     }
+
+    public static async getMiniature(minId: number): Promise<Miniature> {
+        const resp = await axios.get(`/miniatures/${minId}`);
+        return resp.data;
+    }
 }

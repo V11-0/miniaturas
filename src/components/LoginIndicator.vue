@@ -31,7 +31,7 @@
         </v-menu>
     </div>
     <div v-else-if="!isInLoginView">
-        <v-btn color="primary" :to="{ name: 'Login' }">
+        <v-btn color="green darken-2" :to="{ name: 'Login' }">
             <span>Fazer Login</span>
         </v-btn>
     </div>

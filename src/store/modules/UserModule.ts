@@ -1,3 +1,4 @@
+import { MiniatureCart } from "@/models/MiniatureCart";
 import { User } from "@/models/User";
 import { Module, Mutation, VuexModule } from "vuex-module-decorators";
 
@@ -5,9 +6,15 @@ import { Module, Mutation, VuexModule } from "vuex-module-decorators";
 export default class UserModule extends VuexModule {
 
     user: User | null = null;
+    cart: Array<MiniatureCart> = [];
 
     @Mutation
     setUser(user: User | null): void {
         this.user = user;
+    }
+
+    @Mutation
+    addToCart(product: MiniatureCart) {
+        this.cart.push(product);
     }
 }
